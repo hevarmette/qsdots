@@ -55,7 +55,7 @@ Shape {
         wrapper: root.panels.dashboard
 
         startX: (root.width - wrapper.width) / 2 - rounding
-        startY: 0
+        startY: wrapper.y
     }
 
     BarPopouts.Background {

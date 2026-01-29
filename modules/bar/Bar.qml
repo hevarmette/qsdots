@@ -9,13 +9,13 @@ import Quickshell
 import QtQuick
 import QtQuick.Layouts
 
-ColumnLayout {
+RowLayout {
     id: root
 
     required property ShellScreen screen
     required property PersistentProperties visibilities
     required property BarPopouts.Wrapper popouts
-    readonly property int vPadding: Appearance.padding.large
+    readonly property int hPadding: Appearance.padding.large
 
     function closeTray(): void {
         if (!Config.bar.tray.compact)
@@ -114,7 +114,7 @@ ColumnLayout {
             DelegateChoice {
                 roleValue: "spacer"
                 delegate: WrappedLoader {
-                    Layout.fillHeight: enabled
+                    Layout.fillWidth: enabled
                 }
             }
             DelegateChoice {
@@ -193,11 +193,11 @@ ColumnLayout {
             return null;
         }
 
-        Layout.alignment: Qt.AlignHCenter
+        Layout.alignment: Qt.AlignVCenter
 
         // Cursed ahh thing to add padding to first and last enabled components
-        Layout.topMargin: findFirstEnabled() === this ? root.vPadding : 0
-        Layout.bottomMargin: findLastEnabled() === this ? root.vPadding : 0
+        Layout.leftMargin: findFirstEnabled() === this ? root.hPadding : 0
+        Layout.rightMargin: findLastEnabled() === this ? root.hPadding : 0
 
         visible: enabled
         active: enabled

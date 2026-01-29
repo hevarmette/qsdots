@@ -12,6 +12,7 @@ Item {
     id: root
 
     required property PersistentProperties visibilities
+    clip: true
     readonly property PersistentProperties dashState: PersistentProperties {
         property int currentTab
         property date currentDate: new Date()

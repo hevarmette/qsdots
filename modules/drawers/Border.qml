@@ -37,7 +37,8 @@ Item {
         Rectangle {
             anchors.fill: parent
             anchors.margins: Config.border.thickness
-            anchors.leftMargin: root.bar.implicitWidth
+	    anchors.leftMargin: Config.border.thickness
+	    anchors.topMargin: root.bar.implicitHeight
             radius: Config.border.rounding
         }
     }

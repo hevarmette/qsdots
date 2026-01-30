@@ -46,8 +46,8 @@ CustomMouseArea {
     }
 
     function onWheel(event: WheelEvent): void {
-        if (event.x < bar.implicitWidth) {
-            bar.handleWheel(event.y, event.angleDelta);
+        if (event.y < bar.implicitWidth) {
+            bar.handleWheel(event.x, event.angleDelta);
         }
     }
 
@@ -89,14 +89,14 @@ CustomMouseArea {
         const dragY = y - dragStart.y;
 
         // Show bar in non-exclusive mode on hover
-        if (!visibilities.bar && Config.bar.showOnHover && x < bar.implicitWidth)
+        if (!visibilities.bar && Config.bar.showOnHover && y < bar.implicitHeight)
             bar.isHovered = true;
 
         // Show/hide bar on drag
-        if (pressed && dragStart.x < bar.implicitWidth) {
-            if (dragX > Config.bar.dragThreshold)
+        if (pressed && dragStart.y < bar.implicitHeight) {
+            if (dragY > Config.bar.dragThreshold)
                 visibilities.bar = true;
-            else if (dragX < -Config.bar.dragThreshold)
+            else if (dragY < -Config.bar.dragThreshold)
                 visibilities.bar = false;
         }
 
@@ -200,8 +200,8 @@ CustomMouseArea {
         }
 
         // Show popouts on hover
-        if (x < bar.implicitWidth) {
-            bar.checkPopout(y);
+        if (y < bar.implicitHeight) {
+            bar.checkPopout(x);
         } else if ((!popouts.currentName.startsWith("traymenu") || (popouts.current?.depth ?? 0) <= 1) && !inLeftPanel(panels.popouts, x, y)) {
             popouts.hasCurrent = false;
             bar.closeTray();

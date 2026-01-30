@@ -20,16 +20,16 @@ StyledRect {
     radius: Appearance.rounding.full
 
     clip: true
-    implicitWidth: Config.bar.sizes.innerWidth
-    implicitHeight: iconColumn.implicitHeight + Appearance.padding.normal * 2 - (Config.bar.status.showLockStatus && !Hypr.capsLock && !Hypr.numLock ? iconColumn.spacing : 0)
+    implicitHeight: Config.bar.sizes.innerWidth
+    implicitWidth: iconRow.implicitWidth + Appearance.padding.normal * 2 - (Config.bar.status.showLockStatus && !Hypr.capsLock && !Hypr.numLock ? iconRow.spacing : 0)
 
-    ColumnLayout {
-        id: iconColumn
+    RowLayout {
+        id: iconRow
 
-        anchors.left: parent.left
-        anchors.right: parent.right
+        anchors.top: parent.top
         anchors.bottom: parent.bottom
-        anchors.bottomMargin: Appearance.padding.normal
+        anchors.left: parent.left
+        anchors.leftMargin: Appearance.padding.normal
 
         spacing: Appearance.spacing.smaller / 2
 

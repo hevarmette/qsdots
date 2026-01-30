@@ -55,7 +55,7 @@ StyledClippingRect {
             }
         }
 
-        ColumnLayout {
+        RowLayout {
             id: layout
 
             anchors.centerIn: parent

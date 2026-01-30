@@ -29,8 +29,8 @@ RowLayout {
         }
     }
 
-    function checkPopout(y: real): void {
-        const ch = childAt(width / 2, y) as WrappedLoader;
+    function checkPopout(x: real): void {
+        const ch = childAt(x, height / 2) as WrappedLoader;
 
         if (ch?.id !== "tray")
             closeTray();
@@ -41,25 +41,25 @@ RowLayout {
         }
 
         const id = ch.id;
-        const top = ch.y;
+        const top = ch.x;
         const item = ch.item;
-        const itemHeight = item.implicitHeight;
+        const itemWidth = item.implicitWidth;
 
         if (id === "statusIcons" && Config.bar.popouts.statusIcons) {
-            const items = item.items;
-            const icon = items.childAt(items.width / 2, mapToItem(items, 0, y).y);
-            if (icon) {
+             const items = item.items;
+             const icon = items.childAt(mapToItem(items, x, 0).x, items.height / 2);
+             if (icon) {
                 popouts.currentName = icon.name;
-                popouts.currentCenter = Qt.binding(() => icon.mapToItem(root, 0, icon.implicitHeight / 2).y);
+                popouts.currentCenter = Qt.binding(() => icon.mapToItem(root, icon.implicitWidth / 2, 0).x);
                 popouts.hasCurrent = true;
-            }
+             }
         } else if (id === "tray" && Config.bar.popouts.tray) {
-            if (!Config.bar.tray.compact || (item.expanded && !item.expandIcon.contains(mapToItem(item.expandIcon, item.implicitWidth / 2, y)))) {
-                const index = Math.floor(((y - top - item.padding * 2 + item.spacing) / item.layout.implicitHeight) * item.items.count);
+            if (!Config.bar.tray.compact || (item.expanded && !item.expandIcon.contains(mapToItem(item.expandIcon, x, item.expandIcon.height/2)))) {
+                const index = Math.floor(((x - left - item.padding * 2 + item.spacing) / item.layout.implicitWidth) * item.items.count);
                 const trayItem = item.items.itemAt(index);
                 if (trayItem) {
                     popouts.currentName = `traymenu${index}`;
-                    popouts.currentCenter = Qt.binding(() => trayItem.mapToItem(root, 0, trayItem.implicitHeight / 2).y);
+                    popouts.currentCenter = Qt.binding(() => trayItem.mapToItem(root, trayItem.implicitWidth / 2, 0).x);
                     popouts.hasCurrent = true;
                 } else {
                     popouts.hasCurrent = false;
@@ -70,13 +70,13 @@ RowLayout {
             }
         } else if (id === "activeWindow" && Config.bar.popouts.activeWindow) {
             popouts.currentName = id.toLowerCase();
-            popouts.currentCenter = item.mapToItem(root, 0, itemHeight / 2).y;
+            popouts.currentCenter = item.mapToItem(root, itemWidth / 2, 0).x;
             popouts.hasCurrent = true;
         }
     }
 
-    function handleWheel(y: real, angleDelta: point): void {
-        const ch = childAt(width / 2, y) as WrappedLoader;
+    function handleWheel(x: real, angleDelta: point): void {
+        const ch = childAt(x, height / 2) as WrappedLoader;
         if (ch?.id === "workspaces" && Config.bar.scrollActions.workspaces) {
             // Workspace scroll
             const mon = (Config.bar.workspaces.perMonitorWorkspaces ? Hypr.monitorFor(screen) : Hypr.focusedMonitor);
@@ -85,7 +85,7 @@ RowLayout {
                 Hypr.dispatch(`togglespecialworkspace ${specialWs.slice(8)}`);
             else if (angleDelta.y < 0 || (Config.bar.workspaces.perMonitorWorkspaces ? mon.activeWorkspace?.id : Hypr.activeWsId) > 1)
                 Hypr.dispatch(`workspace r${angleDelta.y > 0 ? "-" : "+"}1`);
-        } else if (y < screen.height / 2 && Config.bar.scrollActions.volume) {
+        } else if (x < screen.width / 2 && Config.bar.scrollActions.volume) {
             // Volume scroll on top half
             if (angleDelta.y > 0)
                 Audio.incrementVolume();

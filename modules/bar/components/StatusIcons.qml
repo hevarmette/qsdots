@@ -14,7 +14,7 @@ StyledRect {
     id: root
 
     property color colour: Colours.palette.m3secondary
-    readonly property alias items: iconColumn
+    readonly property alias items: iconRow
 
     color: Colours.tPalette.m3surfaceContainer
     radius: Appearance.rounding.full
@@ -25,11 +25,13 @@ StyledRect {
 
     RowLayout {
         id: iconRow
-
+	
+	anchors.left: parent.left
+	anchors.right: parent.right
         anchors.top: parent.top
         anchors.bottom: parent.bottom
-        anchors.left: parent.left
         anchors.leftMargin: Appearance.padding.normal
+	anchors.rightMargin: Appearance.padding.normal
 
         spacing: Appearance.spacing.smaller / 2
 

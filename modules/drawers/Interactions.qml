@@ -46,7 +46,7 @@ CustomMouseArea {
     }
 
     function onWheel(event: WheelEvent): void {
-        if (event.y < bar.implicitWidth) {
+        if (event.y < bar.implicitHeight) {
             bar.handleWheel(event.x, event.angleDelta);
         }
     }

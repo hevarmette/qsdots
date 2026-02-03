@@ -91,7 +91,7 @@ Variants {
                 Region {
                     required property Item modelData
 
-                    x: modelData.x + bar.implicitWidth
+                    x: modelData.x + Config.border.thickness
                     y: modelData.y + bar.implicitHeight
                     width: modelData.width
                     height: modelData.height

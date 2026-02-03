@@ -22,15 +22,18 @@ ColumnLayout {
     readonly property bool isOccupied: occupied[ws] ?? false
     readonly property bool hasWindows: isOccupied && Config.bar.workspaces.showWindows
 
-    Layout.alignment: Qt.AlignHCenter
-    Layout.preferredHeight: size
+    Layout.alignment: Qt.AlignVCenter
+    // Layout.preferredHeight: size
+    Layout.fillHeight: true
 
-    spacing: 0
+    spacing: Appearance.spacing.small // Add some spacing
 
     StyledText {
         id: indicator
 
-        Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+        Layout.alignment: Qt.AlignVCenter
+
+	// comment out the below if the aspect ratio is too tall
         Layout.preferredHeight: Config.bar.sizes.innerWidth - Appearance.padding.small * 2
 
         animate: true
@@ -55,14 +58,13 @@ ColumnLayout {
     Loader {
         id: windows
 
-        Layout.alignment: Qt.AlignHCenter
+        Layout.alignment: Qt.AlignVCenter
         Layout.fillHeight: true
-        Layout.topMargin: -Config.bar.sizes.innerWidth / 10
 
         visible: active
         active: root.hasWindows
 
-        sourceComponent: Column {
+        sourceComponent: Row {
             spacing: 0
 
             add: Transition {

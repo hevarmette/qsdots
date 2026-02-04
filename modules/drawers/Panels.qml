@@ -94,14 +94,13 @@ Item {
         x: {
             if (isDetached)
                 return (root.width - nonAnimWidth) / 2;
-            const off = currentCenter - nonAnimWidth / 2; 
+            const off = currentCenter - Config.border.thickness - nonAnimWidth / 2; 
             const diff = root.width - Math.floor(off + nonAnimWidth);
-            if (diff < 0) return off + diff - Config.border.thickness;
-            return Math.max(off, Config.border.thickness);
+            if (diff < 0) return off + diff;
+            return Math.max(off, 0);
         }
 
-        y: isDetached ? (root.height - nonAnimHeight) / 2 : bar.implicitHeight + Config.border.thickness
-        }
+        y: isDetached ? (root.height - nonAnimHeight) / 2 : 0
     }
 
     Utilities.Wrapper {

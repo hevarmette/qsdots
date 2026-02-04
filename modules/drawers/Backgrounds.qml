@@ -66,12 +66,11 @@ Shape {
         
         // Invert rounding if near the right edge? 
         // invertBottomRounding logic was for Y axis. We might need invertRightRounding now?
-        // Let's stick to the basics first:
-        
+        invertBottomRounding: wrapper.y + wrapper.height + 1 >= root.height
         // Start drawing from the top edge of the popout (y=0)
         // Offset X by the relative center of the trigger
-        startX: wrapper.currentCenter - wrapper.x
-        startY: 0 
+        startX: wrapper.x
+        startY: wrapper.y
         
         // NOTE: might need to edit `bar/popouts/Background.qml` to handle Top-side drawing 
         // if it's hardcoded to draw a left-side tail. 

@@ -6,7 +6,7 @@ import Quickshell
 import QtQuick
 import QtQuick.Layouts
 
-ColumnLayout {
+RowLayout {
     id: root
 
     required property int index
@@ -34,7 +34,7 @@ ColumnLayout {
         Layout.alignment: Qt.AlignVCenter
 
 	// comment out the below if the aspect ratio is too tall
-        Layout.preferredHeight: Config.bar.sizes.innerWidth - Appearance.padding.small * 2
+        // Layout.preferredHeight: Config.bar.sizes.innerWidth - Appearance.padding.small * 2
 
         animate: true
         text: {

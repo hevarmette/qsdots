@@ -5,7 +5,7 @@ import qs.services
 import qs.config
 import QtQuick
 
-Column {
+Row {
     id: root
 
     property color colour: Colours.palette.m3tertiary

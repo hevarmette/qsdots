@@ -75,7 +75,7 @@ StyledClippingRect {
         }
 
         Loader {
-            anchors.horizontalCenter: parent.horizontalCenter
+	    anchors.fill: parent
             active: Config.bar.workspaces.activeIndicator
 
             sourceComponent: ActiveIndicator {

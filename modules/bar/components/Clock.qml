@@ -13,7 +13,7 @@ Row {
     spacing: Appearance.spacing.small
 
     Loader {
-        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.verticalCenter: parent.verticalCenter
 
         active: Config.bar.clock.showIcon
         visible: active
@@ -27,10 +27,10 @@ Row {
     StyledText {
         id: text
 
-        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.verticalCenter: parent.verticalCenter
 
         horizontalAlignment: StyledText.AlignHCenter
-        text: Time.format(Config.services.useTwelveHourClock ? "hh\nmm\nA" : "hh\nmm")
+        text: Time.format(Config.services.useTwelveHourClock ? "hh:mm A" : "hh:mm")
         font.pointSize: Appearance.font.size.smaller
         font.family: Appearance.font.family.mono
         color: root.colour

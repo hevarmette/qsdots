@@ -12,6 +12,7 @@ Item {
     id: root
 
     required property PersistentProperties visibilities
+    clip: true
     readonly property PersistentProperties dashState: PersistentProperties {
         property int currentTab
         property date currentDate: new Date()
@@ -48,7 +49,7 @@ Item {
         when: root.visibilities.dashboard && Config.dashboard.enabled
 
         PropertyChanges {
-            root.implicitHeight: content.implicitHeight - bar.implicitHeight // subtract bar height to move the dashboard to the top 
+            root.implicitHeight: content.implicitHeight
         }
     }
 

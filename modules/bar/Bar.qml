@@ -72,10 +72,6 @@ RowLayout {
             popouts.currentName = id.toLowerCase();
             popouts.currentCenter = item.mapToItem(root, itemWidth / 2, 0).x;
             popouts.hasCurrent = true;
-        } else if (id === "mail") {
-            popouts.currentName = id.toLowerCase();
-            popouts.currentCenter = item.mapToItem(root, itemWidth / 2, 0).x;
-            popouts.hasCurrent = true;
         }
     }
 
@@ -148,12 +144,6 @@ RowLayout {
                 roleValue: "tray"
                 delegate: WrappedLoader {
                     sourceComponent: Tray {}
-                }
-            }
-            DelegateChoice {
-                roleValue: "mail"
-                delegate: WrappedLoader {
-                    sourceComponent: Mail {}
                 }
             }
             DelegateChoice {

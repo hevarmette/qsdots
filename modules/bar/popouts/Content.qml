@@ -34,11 +34,6 @@ Item {
         }
 
         Popout {
-            name: "mail"
-            source: "Mail.qml"
-        }
-
-        Popout {
             id: networkPopout
             name: "network"
             sourceComponent: Network {

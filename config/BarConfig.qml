@@ -40,10 +40,6 @@ JsonObject {
             enabled: true
         },
         {
-            id: "mail",
-            enabled: true
-        },
-        {
             id: "clock",
             enabled: true
         },

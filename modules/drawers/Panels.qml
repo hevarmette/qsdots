@@ -83,7 +83,7 @@ Item {
         visibilities: root.visibilities
 
         anchors.horizontalCenter: parent.horizontalCenter
-        anchors.top: parent.top
+        anchors.bottom: parent.bottom
         // anchors.topMargin: -bar.implicitHeight + BorderConfig.thickness //move the dashboard above bar
     }
 

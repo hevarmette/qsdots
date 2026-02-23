@@ -17,18 +17,6 @@ ShapePath {
 
     PathArc {
         relativeX: root.rounding
-        relativeY: -root.roundingY
-        radiusX: root.rounding
-        radiusY: Math.min(root.rounding, root.wrapper.height)
-    }
-
-    PathLine {
-        relativeX: root.wrapper.width - root.rounding * 2
-        relativeY: 0
-    }
-
-    PathArc {
-        relativeX: root.rounding
         relativeY: root.roundingY
         radiusX: root.rounding
         radiusY: Math.min(root.rounding, root.wrapper.height)
@@ -36,6 +24,7 @@ ShapePath {
 
     PathLine {
         relativeX: 0
+        // relativeY: root.wrapper.height - bar.implicitHeight + Appearance.padding.small - root.roundingY * 2 // move the dashboard above the bar
         relativeY: root.wrapper.height - root.roundingY * 2
     }
 
@@ -48,7 +37,7 @@ ShapePath {
     }
 
     PathLine {
-        relativeX: -(root.wrapper.width + root.rounding * 2)
+        relativeX: root.wrapper.width - root.rounding * 2
         relativeY: 0
     }
 
@@ -62,7 +51,15 @@ ShapePath {
 
     PathLine {
         relativeX: 0
+        // relativeY: -(root.wrapper.height - bar.implicitHeight + Appearance.padding.small - root.roundingY * 2) //move the dashboard above the bar
         relativeY: -(root.wrapper.height - root.roundingY * 2)
+    }
+
+    PathArc {
+        relativeX: root.rounding
+        relativeY: -root.roundingY
+        radiusX: root.rounding
+        radiusY: Math.min(root.rounding, root.wrapper.height)
     }
 
     Behavior on fillColor {

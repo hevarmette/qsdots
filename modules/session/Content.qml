@@ -45,17 +45,17 @@ Column {
         KeyNavigation.down: hibernate
     }
 
-    AnimatedImage {
-        width: Config.session.sizes.button
-        height: Config.session.sizes.button
-        sourceSize.width: width
-        sourceSize.height: height
-
-        playing: visible
-        asynchronous: true
-        speed: Appearance.anim.sessionGifSpeed
-        source: Paths.absolutePath(Config.paths.sessionGif)
-    }
+    // AnimatedImage {
+    //     width: Config.session.sizes.button
+    //     height: Config.session.sizes.button
+    //     sourceSize.width: width
+    //     sourceSize.height: height
+    //
+    //     playing: visible
+    //     asynchronous: true
+    //     speed: Appearance.anim.sessionGifSpeed
+    //     source: Paths.absolutePath(Config.paths.sessionGif)
+    // }
 
     SessionButton {
         id: hibernate

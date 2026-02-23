@@ -1,0 +1,181 @@
+{
+  "appearance": {
+    "anim": {
+      "durations": {
+        "scale": 1
+      }
+    },
+    "font": {
+      "family": {
+        "material": "Material Symbols Rounded",
+        "mono": "CaskaydiaCove NF",
+        "sans": "Rubik"
+      },
+      "size": {
+        "scale": 1
+      }
+    },
+    "padding": {
+      "scale": 1
+    },
+    "rounding": {
+      "scale": 1
+    },
+    "spacing": {
+      "scale": 1
+    },
+    "transparency": {
+      "enabled": false,
+      "base": 0.85,
+      "layers": 0.4
+    }
+  },
+  "general": {
+    "apps": {
+      "terminal": ["ghostty", "-e"],
+      "audio": ["pavucontrol"]
+    },
+    "idle": {
+      "inhibitWhenAudio": true,
+      "lockTimeout": 600,
+      "dpmsTimeout": 630,
+      "sleepTimeout": 1800
+    }
+  },
+  "background": {
+    "desktopClock": {
+      "enabled": false
+    },
+    "enabled": true
+  },
+  "bar": {
+    "dragThreshold": 20,
+    "entries": [
+      {
+        "id": "logo",
+        "enabled": true
+      },
+      {
+        "id": "workspaces",
+        "enabled": true
+      },
+      {
+        "id": "activeWindow",
+        "enabled": true
+      },
+      {
+        "id": "spacer",
+        "enabled": true
+      },
+      {
+        "id": "tray",
+        "enabled": true
+      },
+      {
+        "id": "mail",
+        "enabled": true
+      },
+      {
+        "id": "clock",
+        "enabled": true
+      },
+      {
+        "id": "statusIcons",
+        "enabled": true
+      },
+      {
+        "id": "power",
+        "enabled": true
+      }
+    ],
+    "persistent": true,
+    "showOnHover": true,
+    "status": {
+      "showAudio": false,
+      "showBattery": true,
+      "showBluetooth": true,
+      "showKbLayout": false,
+      "showNetwork": true
+    },
+    "tray": {
+      "background": false,
+      "recolour": false
+    },
+    "sizes": {
+      "innerHeight": 30
+    },
+    "workspaces": {
+      "activeIndicator": true,
+      "activeLabel": "󰮯",
+      "activeTrail": true,
+      "label": "  ",
+      "occupiedBg": true,
+      "occupiedLabel": "󰮯",
+      "perMonitorWorkspaces": true,
+      "showWindows": true,
+      "shown": 8
+    }
+  },
+  "border": {
+    "rounding": 12,
+    "thickness": 5
+  },
+  "dashboard": {
+    "enabled": true,
+    "dragThreshold": 50,
+    "mediaUpdateInterval": 500,
+    "showOnHover": true,
+    "visualiserBars": 45
+  },
+  "launcher": {
+    "actionPrefix": ">",
+    "dragThreshold": 50,
+    "vimKeybinds": false,
+    "enableDangerousActions": false,
+    "maxShown": 8,
+    "maxWallpapers": 9,
+    "useFuzzy": {
+      "apps": false,
+      "actions": false,
+      "schemes": false,
+      "variants": false,
+      "wallpapers": false
+    }
+  },
+  "lock": {
+    "recolourLogo": false
+  },
+  "notifs": {
+    "actionOnClick": false,
+    "clearThreshold": 0.3,
+    "defaultExpireTimeout": 5000,
+    "expandThreshold": 20,
+    "expire": false
+  },
+  "osd": {
+    "hideDelay": 2000,
+    "enableBrightness": false
+  },
+  "paths": {
+    "mediaGif": "root:/assets/bongocat.gif",
+    "sessionGif": "root:/assets/kurukuru.gif",
+    "wallpaperDir": "~/Pictures/Wallpapers"
+  },
+  "services": {
+    "audioIncrement": 0.1,
+    "weatherLocation": "10,10",
+    "useFahrenheit": false,
+    "useTwelveHourClock": false,
+    "smartScheme": true
+  },
+  "session": {
+    "dragThreshold": 30,
+    "vimKeybinds": false,
+    "commands": {
+      "logout": ["loginctl", "terminate-user", ""],
+      "shutdown": ["systemctl", "poweroff"],
+      "hibernate": ["systemctl", "hibernate"],
+      "reboot": ["systemctl", "reboot"]
+    }
+  }
+}

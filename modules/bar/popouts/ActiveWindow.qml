@@ -12,8 +12,8 @@ Item {
 
     required property Item wrapper
 
-    implicitWidth: Hypr.activeToplevel ? child.implicitWidth : -Appearance.padding.large * 2
-    implicitHeight: child.implicitHeight
+    implicitWidth: child.implicitWidth
+    implicitHeight: Hypr.activeToplevel ? child.implicitHeight : -Appearance.padding.large * 2
 
     Column {
         id: child

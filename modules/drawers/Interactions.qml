@@ -33,10 +33,9 @@ CustomMouseArea {
     }
 
     function inRightPanel(panel: Item, x: real, y: real): bool {
-        return x > bar.implicitWidth + panel.x && withinPanelHeight(panel, x, y);
+        return x > Config.border.thickness + panel.x && withinPanelHeight(panel, x, y);
     }
 
-    // unused with my changes because I want the dashboard to be on the bottom
     function inTopPanel(panel: Item, x: real, y: real): bool {
         return y < Config.border.thickness + panel.y + panel.height && withinPanelWidth(panel, x, y);
     }
@@ -46,8 +45,8 @@ CustomMouseArea {
     }
 
     function onWheel(event: WheelEvent): void {
-        if (event.x < bar.implicitWidth) {
-            bar.handleWheel(event.y, event.angleDelta);
+        if (event.y < bar.implicitHeight) {
+            bar.handleWheel(event.x, event.angleDelta);
         }
     }
 
@@ -89,14 +88,14 @@ CustomMouseArea {
         const dragY = y - dragStart.y;
 
         // Show bar in non-exclusive mode on hover
-        if (!visibilities.bar && Config.bar.showOnHover && x < bar.implicitWidth)
+        if (!visibilities.bar && Config.bar.showOnHover && y < bar.implicitHeight)
             bar.isHovered = true;
 
         // Show/hide bar on drag
-        if (pressed && dragStart.x < bar.implicitWidth) {
-            if (dragX > Config.bar.dragThreshold)
+        if (pressed && dragStart.y < bar.implicitHeight) {
+            if (dragY > Config.bar.dragThreshold)
                 visibilities.bar = true;
-            else if (dragX < -Config.bar.dragThreshold)
+            else if (dragY < -Config.bar.dragThreshold)
                 visibilities.bar = false;
         }
 
@@ -200,8 +199,8 @@ CustomMouseArea {
         }
 
         // Show popouts on hover
-        if (x < bar.implicitWidth) {
-            bar.checkPopout(y);
+        if (y < bar.implicitHeight) {
+            bar.checkPopout(x);
         } else if ((!popouts.currentName.startsWith("traymenu") || (popouts.current?.depth ?? 0) <= 1) && !inLeftPanel(panels.popouts, x, y)) {
             popouts.hasCurrent = false;
             bar.closeTray();
@@ -220,7 +219,7 @@ CustomMouseArea {
                 root.utilitiesShortcutActive = false;
 
                 // Also hide dashboard and OSD if they're not being hovered
-                const inDashboardArea = root.inBottomPanel(root.panels.dashboard, root.mouseX, root.mouseY);
+                const inDashboardArea = root.inTopPanel(root.panels.dashboard, root.mouseX, root.mouseY);
                 const inOsdArea = root.inRightPanel(root.panels.osd, root.mouseX, root.mouseY);
 
                 if (!inDashboardArea) {
@@ -236,7 +235,7 @@ CustomMouseArea {
         function onDashboardChanged() {
             if (root.visibilities.dashboard) {
                 // Dashboard became visible, immediately check if this should be shortcut mode
-                const inDashboardArea = root.inBottomPanel(root.panels.dashboard, root.mouseX, root.mouseY);
+                const inDashboardArea = root.inTopPanel(root.panels.dashboard, root.mouseX, root.mouseY);
                 if (!inDashboardArea) {
                     root.dashboardShortcutActive = true;
                 }

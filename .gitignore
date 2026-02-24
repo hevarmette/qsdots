@@ -1,6 +1,12 @@
-.direnv
+.direnv/
 /result
 /.qmlls.ini
 build/
+# Devenv
+.devenv*
+
+devenv.local.nix
+# direnv
+.direnv
 .cache/
 logs

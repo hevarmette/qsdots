@@ -62,11 +62,11 @@ Item {
                 return i % Config.bar.workspaces.shown;
             }
 
-            anchors.horizontalCenter: root.horizontalCenter
+            anchors.verticalCenter: root.verticalCenter
 
-            y: (start?.y ?? 0) - 1
-            implicitWidth: Config.bar.sizes.innerWidth - Appearance.padding.small * 2 + 2
-            implicitHeight: start && end ? end.y + end.size - start.y + 2 : 0
+            x: (start?.x ?? 0) - 1
+            implicitWidth: start && end ? end.x + end.size - start.x + 2 : 0
+            implicitHeight: Config.bar.sizes.innerHeight - Appearance.padding.small * 2 + 2
 
             color: Colours.layer(Colours.palette.m3surfaceContainerHigh, 2)
             radius: Appearance.rounding.full
@@ -80,11 +80,11 @@ Item {
                 }
             }
 
-            Behavior on y {
+            Behavior on x {
                 Anim {}
             }
 
-            Behavior on implicitHeight {
+            Behavior on implicitWidth {
                 Anim {}
             }
         }

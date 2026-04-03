@@ -1,19 +1,20 @@
 pragma ComponentBehavior: Bound
 
-import qs.services
-import qs.config
 import "popouts" as BarPopouts
 import "components"
 import "components/workspaces"
-import Quickshell
 import QtQuick
 import QtQuick.Layouts
+import Quickshell
+import qs.components
+import qs.services
+import qs.config
 
 RowLayout {
     id: root
 
     required property ShellScreen screen
-    required property PersistentProperties visibilities
+    required property DrawerVisibilities visibilities
     required property BarPopouts.Wrapper popouts
     readonly property int hPadding: Appearance.padding.large
 
@@ -22,9 +23,9 @@ RowLayout {
             return;
 
         for (let i = 0; i < repeater.count; i++) {
-            const item = repeater.itemAt(i);
-            if (item?.enabled && item.id === "tray") {
-                item.item.expanded = false;
+            const loader = repeater.itemAt(i) as WrappedLoader;
+            if (loader?.enabled && loader.id === "tray") {
+                (loader.item as Tray).expanded = false;
             }
         }
     }
@@ -66,9 +67,9 @@ RowLayout {
                 }
             } else {
                 popouts.hasCurrent = false;
-                item.expanded = true;
+                tray.expanded = true;
             }
-        } else if (id === "activeWindow" && Config.bar.popouts.activeWindow) {
+        } else if (id === "activeWindow" && Config.bar.popouts.activeWindow && Config.bar.activeWindow.showOnHover) {
             popouts.currentName = id.toLowerCase();
             popouts.currentCenter = item.mapToItem(root, itemWidth / 2, 0).x;
             popouts.hasCurrent = true;
@@ -128,12 +129,15 @@ RowLayout {
                 delegate: WrappedLoader {
                     sourceComponent: Workspaces {
                         screen: root.screen
+                        fullscreen: root.fullscreen
                     }
                 }
             }
             DelegateChoice {
                 roleValue: "activeWindow"
                 delegate: WrappedLoader {
+                    Layout.fillWidth: true
+                    visible: !root.fullscreen
                     sourceComponent: ActiveWindow {
                         bar: root
                         monitor: Brightness.getMonitorForScreen(root.screen)
@@ -143,18 +147,21 @@ RowLayout {
             DelegateChoice {
                 roleValue: "tray"
                 delegate: WrappedLoader {
+                    visible: !root.fullscreen
                     sourceComponent: Tray {}
                 }
             }
             DelegateChoice {
                 roleValue: "clock"
                 delegate: WrappedLoader {
+                    visible: !root.fullscreen
                     sourceComponent: Clock {}
                 }
             }
             DelegateChoice {
                 roleValue: "statusIcons"
                 delegate: WrappedLoader {
+                    visible: !root.fullscreen
                     sourceComponent: StatusIcons {}
                 }
             }
@@ -170,7 +177,7 @@ RowLayout {
     }
 
     component WrappedLoader: Loader {
-        required property bool enabled
+        required enabled
         required property string id
         required property int index
 

@@ -1,12 +1,12 @@
 pragma ComponentBehavior: Bound
 
+import QtQuick
+import Quickshell
+import Caelestia
 import qs.components
 import qs.components.filedialog
 import qs.config
 import qs.utils
-import Caelestia
-import Quickshell
-import QtQuick
 
 Item {
     id: root
@@ -31,7 +31,7 @@ Item {
         }
     }
 
-    readonly property real nonAnimHeight: state === "visible" ? (content.item?.nonAnimHeight ?? 0) : 0
+    readonly property real nonAnimHeight: state === "visible" ? ((content.item as Content)?.nonAnimHeight ?? 0) : 0
 
     visible: height > 0
     implicitHeight: 0
@@ -99,7 +99,7 @@ Item {
 
         sourceComponent: Content {
             visibilities: root.visibilities
-            state: root.dashState
+            dashState: root.dashState
             facePicker: root.facePicker
         }
     }

@@ -1,10 +1,10 @@
 pragma ComponentBehavior: Bound
 
+import QtQuick
 import qs.components
 import qs.services
-import qs.utils
 import qs.config
-import QtQuick
+import qs.utils
 
 Item {
     id: root
@@ -24,6 +24,32 @@ Item {
     clip: true
     implicitWidth: icon.implicitWidth + current.implicitWidth + current.anchors.leftMargin
     implicitHeight: Math.max(icon.implicitWidth, current.implicitHeight)
+
+    Loader {
+        asynchronous: true
+        anchors.fill: parent
+        active: !Config.bar.activeWindow.showOnHover
+
+        sourceComponent: MouseArea {
+            cursorShape: Qt.PointingHandCursor
+            hoverEnabled: true
+            onPositionChanged: {
+                const popouts = root.bar.popouts;
+                if (popouts.hasCurrent && popouts.currentName !== "activewindow")
+                    popouts.hasCurrent = false;
+            }
+            onClicked: {
+                const popouts = root.bar.popouts;
+                if (popouts.hasCurrent) {
+                    popouts.hasCurrent = false;
+                } else {
+                    popouts.currentName = "activewindow";
+                    popouts.currentCenter = root.mapToItem(root.bar, 0, root.implicitHeight / 2).y;
+                    popouts.hasCurrent = true;
+                }
+            }
+        }
+    }
 
     MaterialIcon {
         id: icon
@@ -46,7 +72,7 @@ Item {
     TextMetrics {
         id: metrics
 
-        text: Hypr.activeToplevel?.title ?? qsTr("Desktop")
+        text: root.windowTitle
         font.pointSize: Appearance.font.size.smaller
         font.family: Appearance.font.family.mono
         elide: Qt.ElideRight

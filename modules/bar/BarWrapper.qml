@@ -1,19 +1,21 @@
 pragma ComponentBehavior: Bound
 
+import QtQuick
+import Quickshell
 import qs.components
 import qs.config
-import "popouts" as BarPopouts
-import Quickshell
-import QtQuick
+import qs.modules.bar.popouts as BarPopouts
 
 Item {
     id: root
 
     required property ShellScreen screen
-    required property PersistentProperties visibilities
+    required property DrawerVisibilities visibilities
     required property BarPopouts.Wrapper popouts
     required property bool disabled
+    required property bool fullscreen
 
+    readonly property int clampedWidth: Math.max(Config.border.minThickness, implicitWidth)
     readonly property int padding: Math.max(Appearance.padding.smaller, Config.border.thickness)
     readonly property int contentHeight: Config.bar.sizes.innerHeight + padding * 2
     readonly property int exclusiveZone: !disabled && (Config.bar.persistent || visibilities.bar) ? contentHeight : Config.border.thickness
@@ -21,7 +23,7 @@ Item {
     property bool isHovered
 
     function closeTray(): void {
-        content.item?.closeTray();
+        (content.item as Bar)?.closeTray();
     }
 
     function checkPopout(x: real): void {
@@ -81,7 +83,8 @@ Item {
             height: root.contentHeight
             screen: root.screen
             visibilities: root.visibilities
-            popouts: root.popouts
+            popouts: root.popouts // qmllint disable incompatible-type
+            fullscreen: root.fullscreen
         }
     }
 }

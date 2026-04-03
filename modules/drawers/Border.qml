@@ -1,15 +1,16 @@
 pragma ComponentBehavior: Bound
 
-import qs.components
-import qs.services
-import qs.config
 import QtQuick
 import QtQuick.Effects
+import qs.components
+import qs.services
 
 Item {
     id: root
 
     required property Item bar
+    required property real borderThickness
+    required property real borderRounding
 
     anchors.fill: parent
 

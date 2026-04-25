@@ -35,14 +35,14 @@ Item {
     }
 
     visible: height > Config.border.thickness
-    implicitHeight: Config.border.thickness
+    height: Config.border.thickness
 
     states: State {
         name: "visible"
         when: root.shouldBeVisible
 
         PropertyChanges {
-            root.implicitHeight: root.contentHeight
+            root.height: root.contentHeight
         }
     }
 
@@ -53,7 +53,7 @@ Item {
 
             Anim {
                 target: root
-                property: "implicitHeight"
+                property: "height"
                 duration: Appearance.anim.durations.expressiveDefaultSpatial
                 easing.bezierCurve: Appearance.anim.curves.expressiveDefaultSpatial
             }
@@ -64,7 +64,7 @@ Item {
 
             Anim {
                 target: root
-                property: "implicitHeight"
+                property: "height"
                 easing.bezierCurve: Appearance.anim.curves.emphasized
             }
         }

@@ -5,7 +5,7 @@ import qs.components
 import qs.services
 import qs.config
 
-Row {
+Item {
     id: root
 
     readonly property color colour: Colours.palette.m3tertiary
@@ -13,9 +13,6 @@ Row {
 
     implicitWidth: Config.bar.sizes.innerWidth
     implicitHeight: layout.implicitHeight + root.padding * 2
-
-    Loader {
-        anchors.verticalCenter: parent.verticalCenter
 
     Column {
         id: layout
@@ -67,17 +64,5 @@ Row {
             font.family: Appearance.font.family.mono
             color: root.colour
         }
-    }
-
-    StyledText {
-        id: text
-
-        anchors.verticalCenter: parent.verticalCenter
-
-        verticalAlignment: StyledText.AlignVCenter
-        text: Time.format(Config.services.useTwelveHourClock ? "hh:mm A" : "hh:mm")
-        font.pointSize: Appearance.font.size.smaller
-        font.family: Appearance.font.family.mono
-        color: root.colour
     }
 }

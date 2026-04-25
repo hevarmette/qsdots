@@ -16,6 +16,7 @@ RowLayout {
     required property ShellScreen screen
     required property DrawerVisibilities visibilities
     required property BarPopouts.Wrapper popouts
+    required property bool fullscreen
     readonly property int hPadding: Appearance.padding.large
 
     function closeTray(): void {

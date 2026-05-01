@@ -44,7 +44,7 @@ Item {
                     popouts.hasCurrent = false;
                 } else {
                     popouts.currentName = "activewindow";
-                    popouts.currentCenter = root.mapToItem(root.bar, 0, root.implicitHeight / 2).y;
+                    popouts.currentCenter = root.mapToItem(root.bar, root.implicitWidth / 2, 0).x;
                     popouts.hasCurrent = true;
                 }
             }

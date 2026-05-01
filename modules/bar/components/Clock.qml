@@ -5,64 +5,33 @@ import qs.components
 import qs.services
 import qs.config
 
-Item {
+Row {
     id: root
 
     readonly property color colour: Colours.palette.m3tertiary
-    readonly property int padding: Config.bar.clock.background ? Appearance.padding.normal : Appearance.padding.small
 
-    implicitWidth: Config.bar.sizes.innerWidth
-    implicitHeight: layout.implicitHeight + root.padding * 2
+    spacing: Appearance.spacing.small
 
-    Column {
-        id: layout
+    Loader {
+        asynchronous: true
+        anchors.verticalCenter: parent.verticalCenter
 
-        anchors.centerIn: parent
-        spacing: Appearance.spacing.small
+        active: Config.bar.clock.showIcon
+        visible: active
 
-        Loader {
-            asynchronous: true
-            anchors.horizontalCenter: parent.horizontalCenter
-
-            active: Config.bar.clock.showIcon
-            visible: active
-
-            sourceComponent: MaterialIcon {
-                text: "calendar_month"
-                color: root.colour
-            }
-        }
-
-        StyledText {
-            anchors.horizontalCenter: parent.horizontalCenter
-
-            visible: Config.bar.clock.showDate
-
-            horizontalAlignment: StyledText.AlignHCenter
-            text: Time.format("ddd\nd")
-            font.pointSize: Appearance.font.size.smaller
-            font.family: Appearance.font.family.sans
+        sourceComponent: MaterialIcon {
+            text: "calendar_month"
             color: root.colour
         }
+    }
 
-        Rectangle {
-            anchors.horizontalCenter: parent.horizontalCenter
-            visible: Config.bar.clock.showDate
-            height: visible ? 1 : 0
+    StyledText {
+        anchors.verticalCenter: parent.verticalCenter
 
-            width: parent.width * 0.8
-            color: root.colour
-            opacity: 0.2
-        }
-
-        StyledText {
-            anchors.horizontalCenter: parent.horizontalCenter
-
-            horizontalAlignment: StyledText.AlignHCenter
-            text: Time.format(Config.services.useTwelveHourClock ? "hh\nmm\nA" : "hh\nmm")
-            font.pointSize: Appearance.font.size.smaller
-            font.family: Appearance.font.family.mono
-            color: root.colour
-        }
+        verticalAlignment: StyledText.AlignVCenter
+        text: Time.format(Config.services.useTwelveHourClock ? "hh:mm A" : "hh:mm")
+        font.pointSize: Appearance.font.size.smaller
+        font.family: Appearance.font.family.mono
+        color: root.colour
     }
 }

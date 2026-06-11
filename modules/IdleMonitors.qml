@@ -21,6 +21,10 @@ Scope {
             lock.lock.locked = true;
         else if (action === "unlock")
             lock.lock.locked = false;
+	else if (action === "dpms off")
+	    Hypr.dispatch(`hl.dsp.dpms({ action = "off" })`);
+	else if (action === "dpms on")
+	    Hypr.dispatch(`hl.dsp.dpms({ action = "on" })`);
         else if (typeof action === "string")
             Hypr.dispatch(action);
         else

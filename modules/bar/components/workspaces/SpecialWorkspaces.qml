@@ -352,9 +352,9 @@ Item {
 
             const ws = view.itemAt(event.x, event.y);
             if (ws?.modelData)
-                Hypr.dispatch(`togglespecialworkspace ${ws.modelData.name.slice(8)}`);
+                Hypr.dispatch(`hl.dsp.workspace.toggle_special("${ws.modelData.name.slice(8)}")`);
             else
-                Hypr.dispatch("togglespecialworkspace special");
+                Hypr.dispatch(`hl.dsp.workspace.toggle_special("special")`);
         }
     }
 }

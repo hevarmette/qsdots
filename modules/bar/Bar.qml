@@ -82,9 +82,9 @@ RowLayout {
             const mon = (Config.bar.workspaces.perMonitorWorkspaces ? Hypr.monitorFor(screen) : Hypr.focusedMonitor);
             const specialWs = mon?.lastIpcObject.specialWorkspace.name;
             if (specialWs?.length > 0)
-                Hypr.dispatch(`togglespecialworkspace ${specialWs.slice(8)}`);
+                Hypr.dispatch(`hl.dsp.workspace.toggle_special("${ws.modelData.name.slice(8)}")`);
             else if (angleDelta.y < 0 || (Config.bar.workspaces.perMonitorWorkspaces ? mon.activeWorkspace?.id : Hypr.activeWsId) > 1)
-                Hypr.dispatch(`workspace r${angleDelta.y > 0 ? "-" : "+"}1`);
+                Hypr.dispatch(`hl.dsp.focus({ workspace = "e${angleDelta.y > 0 ? "-" : "+"}1" })`);
         } else if (x < screen.width / 2 && Config.bar.scrollActions.volume) {
             // Volume scroll on top half
             if (angleDelta.y > 0)
